@@ -1,0 +1,34 @@
+/* =============================================================================
+ * resalta_sintaxis.css - Hoja de Estilos para Resaltador de Sintaxis
+ *
+ * Autores: Marcelo Treviño Velazquez  - A01286389
+ *          Ilan
+ *          Ringo Emiliano Garcia Gastelum - A01743951
+ *
+ * Materia: TC2037 Implementación de Métodos Computacionales
+ * Actividad 3.2 - Resaltador de Sintaxis
+ * ============================================================================= */
+
+body {
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    font-family: 'Courier New', 'Consolas', monospace;
+    margin: 20px;
+}
+
+pre {
+    background-color: #181825;
+    border: 1px solid #313244;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.simbolo    { color: #89b4fa; }  /* azul */
+.numero     { color: #a6e3a1; }  /* verde */
+.booleano   { color: #cba6f7; font-weight: bold; }  /* morado */
+.string     { color: #fab387; }  /* naranja */
+.parentesis { color: #f9e2af; font-weight: bold; }  /* amarillo */
+.fin        { color: #6c7086; }  /* gris */
+.error      { color: #f38ba8; background-color: #45273a; }  /* rojo */
