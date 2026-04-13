@@ -25,10 +25,11 @@ END  = 106   # fin de entrada $
 ERR  = 200   # error lexico
 
 # ---- Variables globales del scanner ----
-html_body = ""    # contenido HTML acumulado
-lexema    = ""    # lexema del token actual
-c         = ""    # caracter leido
-leer      = True  # True = leer nuevo caracter, False = reusar actual
+html_body  = ""    # contenido HTML acumulado
+lexema     = ""    # lexema del token actual
+c          = ""    # caracter leido
+leer       = True  # True = leer nuevo caracter, False = reusar actual
+error_info = ""    # texto que causo el error (para mensajes especificos)
 
 # ---- Matriz de Transiciones del AFD ----
 # Estados no finales:
@@ -72,7 +73,7 @@ def escape_html(text):
 def obten_token():
     """Lee caracteres de la entrada estandar y retorna el siguiente token.
     Simultaneamente genera el HTML resaltado en html_body."""
-    global html_body, lexema, c, leer
+    global html_body, lexema, c, leer, error_info
 
     edo = 0
     lexema = ""
@@ -118,6 +119,13 @@ def obten_token():
         lexema = c
         html_body += '<span class="fin">' + escape_html(c) + '</span>'
     elif edo == ERR:
+        # Determinar que mostrar en el mensaje de error:
+        # Si c es espacio/delimitador, el problema es el lexema incompleto (ej: # sin t/f)
+        # Si c es otro caracter, ese caracter es el problema (ej: @ dentro de string)
+        if c.strip() == '' or c in ('(', ')', '$'):
+            error_info = lexema.strip()
+        else:
+            error_info = c
         html_body += '<span class="error">' + escape_html(lexema + c) + '</span>'
 
     return edo
