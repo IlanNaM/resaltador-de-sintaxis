@@ -5,14 +5,33 @@
 #   numero, simbolo, booleano, string, parentesis y fin de entrada ($)
 #
 # Autores: Marcelo Treviño Velazquez  - A01286389
-#          Ilan
+#          Ilan David Narváez Martínez - A01412672
 #          Ringo Emiliano Garcia Gastelum - A01743951
 #
 # Materia: TC2037 Implementación de Métodos Computacionales
 # Actividad 3.2 - Resaltador de Sintaxis
 # =============================================================================
 
+import os
 import sys
+
+# ---- Documento de entrada a Leer ----
+
+# Placeholder para guardar el documento.
+doc = None
+
+def set_documento_input(doc_ruta: str = "", tener_abierto: bool = True):
+    global doc
+    if tener_abierto:
+        try:
+            doc = open(doc_ruta, 'r', encoding='utf-8')
+            print(f"El archivo {os.path.split(doc_ruta)[1]} ha sido cargado!")
+        except FileNotFoundError as fnfe:
+            print(f"El documento no pudo ser leído, razón:\n{fnfe}")
+            sys.exit(1)
+    else:
+        if doc is not None:
+            doc.close()
 
 # ---- Tipos de token (estados aceptores del AFD) ----
 NUM  = 100   # numero: 1+ digitos
@@ -81,7 +100,8 @@ def obten_token():
     # Ciclo del AFD: avanzar mientras el estado no sea aceptor
     while edo < 100:
         if leer:
-            c = sys.stdin.read(1)
+            c = doc.read(1)
+            # c = sys.stdin.read(1)
             if not c:  # fin de archivo
                 return END
         else:
