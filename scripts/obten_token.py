@@ -20,6 +20,10 @@ import sys
 # Placeholder para guardar el documento.
 doc = None
 
+"""
+Esta función se encarga de cargar el documento "input" de la cual
+se realizará el análisis léxico.
+"""
 def set_documento_input(doc_ruta: str = "", tener_abierto: bool = True):
     global doc
     if tener_abierto:
@@ -86,7 +90,7 @@ def filtro(c):
     else:                              return 11  # caracter ilegal
 
 def escape_html(text):
-    """Escapa caracteres especiales para insertar en HTML."""
+    # Escapa caracteres especiales para insertar en HTML.
     return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 def obten_token():

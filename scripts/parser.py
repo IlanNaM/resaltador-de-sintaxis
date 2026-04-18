@@ -118,14 +118,14 @@ def generar_html():
 # ===================== MANEJO DE ERRORES =====================================
 
 def error_lexico():
-    """Agrega leyenda de error lexico al HTML, genera el archivo y aborta."""
+    # Agrega leyenda de error lexico al HTML, genera el archivo y aborta.
     info = scanner.escape_html(scanner.error_info.strip())
     scanner.add_html(' <span class="error-msg">==&gt; error de l\u00e9xico en ' + info + '</span>')
     generar_html()
     sys.exit(1)
 
 def error_sintactico():
-    """Agrega leyenda de error sintactico al HTML, genera el archivo y aborta."""
+    # Agrega leyenda de error sintactico al HTML, genera el archivo y aborta.
     info = scanner.escape_html(scanner.lexema.strip())
     scanner.add_html(' <span class="error-msg">==&gt; error de sint\u00e1xis en ' + info + '</span>')
     generar_html()
